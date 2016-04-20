@@ -1,0 +1,85 @@
+--Comentar todo!
+--Las tablas que pueden adaptarse:
+create table catUsr(
+
+	idUsr int,
+	nombreUsuario varchar(20),
+	direccion varchar(20),
+	edad int
+
+	primary key(idUsr)
+
+)
+
+create table demo(
+
+	idDemo int,
+	idUsr int,
+	fecha date
+
+	primary key(idDemo)
+	foreign key(idUsr) references catUsr
+)
+
+create table catProducto(
+
+	idProducto int,
+	nombreProducto varchar(20),
+	costo money,
+	disponible int	
+
+	primary key(idProducto)
+)
+
+create table detDemo(
+
+	idDemo int,
+	idProducto int,
+	cantidad int
+
+	primary key(idDemo, idProducto)
+	foreign key(idDemo) references demo,
+	foreign key(idProducto) references catProducto
+)
+
+--Operaciones más usadas (por ahora es más cómodo regresar aquí cuando se requiere una op):
+
+								select*from catUsr
+								select*from demo
+								select*from catProducto
+								select*from detDemo
+
+
+
+								drop table catUsr
+								drop table demo
+								drop table catProducto
+								drop table detDemo
+
+--Operaciones secundarias:
+
+insert catUsr values (01,'Bob','Jamaica',24),(02,'Marley','Kingston',25),
+						(03,'Ra','Egipto',3000),(04,'Set','Egipto',35000)
+insert catUsr values (5,'Cholo','Defeño',500)
+
+
+	insert demo values (01,01,'2016-04-19'),(02,01,'2016-04-19'),
+						(03,02,'2016-04-19'),(04,03,'2016-04-19')
+	insert demo values (5,5,'2016-04-19')
+
+
+		insert catProducto values (01,'Radio',30,15),(02,'Televisor',60,30),
+							(03,'Proyector',90,45),(04,'Portal',120,60)
+		insert catProducto values (01,'Radio',30,15)
+
+
+			insert detDemo values (01,04,150),(02,04,150),
+								(03,03,200),(04,02,250)
+			insert detDemo values (01,04,150)
+
+
+alter table demo drop column idDemo
+
+--Op "avanzadas"(hasta ahora, los join y view):
+
+
